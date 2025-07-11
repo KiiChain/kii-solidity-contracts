@@ -2,7 +2,7 @@ require('dotenv').config();
 const { ethers } = require('hardhat');
 
 async function main() {
-  const contractAddress = "0x2D2f2889aA49dd67032FFF5f8628a5d750E666b8"; // alamat deploy lo
+  const contractAddress = "0x2D2f2889aA49dd67032FFF5f8628a5d750E666b8"; // Deployed contract address
   const [deployer] = await ethers.getSigners();
 
   const AssetToken = await ethers.getContractFactory("AssetToken");

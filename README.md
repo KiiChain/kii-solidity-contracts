@@ -33,7 +33,7 @@ This repository showcases several example smart contracts, including:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/rjsrams/kii-solidity-contracts.git
+git clone https://github.com/KiiChain/kii-solidity-contracts.git
 cd kii-solidity-contracts
 npm install
 

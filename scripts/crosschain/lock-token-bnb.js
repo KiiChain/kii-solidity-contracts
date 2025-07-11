@@ -6,7 +6,7 @@ const BRIDGE_ADDRESS = "0x890a322Bf45B5aB6b2242c03Db15aD55E7786f13";
 const RECIPIENT = "0xf3C61576526a0535035174ec8f892077C74Caaf4";
 const TARGET_CHAIN = "KiiChain";
 
-const AMOUNT = ethers.utils.parseEther("100"); // 100 token (18 desimal)
+const AMOUNT = ethers.utils.parseEther("100"); // 100 tokens (18 decimal)
 
 async function main() {
   const [deployer] = await ethers.getSigners();
