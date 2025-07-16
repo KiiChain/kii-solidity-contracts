@@ -60,6 +60,18 @@ npx hardhat test
 1. You can find a basic test file in **test/basic-test.ts**.
 2. This test verifies successful deployment of the **AirdropNFT** contract.
 
+## ⚙️ Continuous Integration
+
+This project uses GitHub Actions to run a series of checks on every push and pull request to the `main` branch. This ensures that the codebase remains consistent and that all tests pass.
+
+The CI workflow runs the following checks:
+
+- **Linting**: `npx solhint 'contracts/**/*.sol'`
+- **Formatting**: `npx prettier --check 'contracts/**/*.sol'`
+- **Tests**: `npx hardhat test`
+
+You can run these checks locally to ensure your contributions will pass the CI.
+
 ## 🤝 Contribution
 Pull Requests are welcome!
 Please follow the instructions above to set up your environment and run tests locally before submitting a PR.

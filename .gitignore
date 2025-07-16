@@ -15,3 +15,9 @@ node_modules
 
 # Build files 
 /build
+
+# Compiled JavaScript files
+*.js
+ignition/modules/*.js
+scripts/*.js
+test/*.js

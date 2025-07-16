@@ -127,7 +127,7 @@ describe("Lock", function () {
         // get the withdrawal events in the latest block
         const withdrawalEvents = await lock.getEvents.Withdrawal();
         expect(withdrawalEvents).to.have.lengthOf(1);
-        expect(withdrawalEvents[0].args.amount).to.equal(lockedAmount);
+                expect((withdrawalEvents[0].args as { amount: bigint }).amount).to.equal(lockedAmount);
       });
     });
   });
