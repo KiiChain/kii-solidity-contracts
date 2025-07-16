@@ -1,3 +1,4 @@
+import "dotenv/config";
 import {
   defineChain,
   http,
@@ -39,7 +40,7 @@ export const walletClient = createWalletClient({
 });
 
 const account = privateKeyToAccount(
-  ""
+  (process.env.PRIVATE_KEY as `0x${string}`) || ""
 );
 
 async function main() {
