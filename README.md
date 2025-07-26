@@ -1,73 +1,114 @@
 # 🧾 Kii Solidity Contracts
 
-This repository contains smart contracts for the KiiChain ecosystem, written in Solidity.
+This repository contains Solidity smart contracts developed for the KiiChain ecosystem, including tokenization of real-world assets (RWA), interfaces, and utilities for deployment and testing. The contracts are modular and designed to support scalable, secure, and extensible EVM-based applications.
 
-## 📘 Introduction
+---
 
-This is a simple swap contract that uses the Cosmos bank module on the Kii EVM testnet.
-This contract is designed to swap EVM Kii tokens for internal Cosmos Kii tokens and vice versa.
+## 📂 Structure
 
-## 🚀 Getting Started
-
-Follow these steps to set up the development environment and test the contracts locally.
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/KiiChain/kii-solidity-contracts
-cd kii-solidity-contracts
+```
+contracts/
+│
+├── AssetToken/
+│   ├── AssetToken.sol          # Main ERC20-compatible token with RWA metadata
+│   ├── deploy.js               # Script to deploy AssetToken with parameters
+│   └── README.md               # Module-specific explanation
+│
+├── interfaces/
+│   └── IAssetToken.sol         # Interface for AssetToken
+│
+├── mocks/
+│   └── MockERC20.sol           # Optional: Token mocks for testing
+│
+scripts/
+│   └── deploy.js               # (Moved) - all deploy scripts should be inside module folders
 ```
 
-### 2. Install Dependencies
+---
+
+## 📦 Contracts
+
+### 🔸 AssetToken.sol
+
+A token contract representing RWA (Real World Assets) with the following features:
+
+- Based on `ERC20` with name/symbol/decimals
+- Includes immutable asset metadata such as:
+  - `assetType` (e.g. "real_estate", "art", "equity")
+  - `jurisdiction` (e.g. "SG", "US", "ID")
+  - `legalReference` (e.g. doc link or reference code)
+  - `documentUri` (e.g. IPFS or HTTPS link)
+
+See full module README: [`contracts/AssetToken/README.md`](./contracts/AssetToken/README.md)
+
+---
+
+## 🚀 Deployment
+
+> Requires: [Node.js](https://nodejs.org/), [Hardhat](https://hardhat.org/), and EVM-compatible RPC endpoint.
+
+Install dependencies:
 
 ```bash
 npm install
 ```
-⚠️ Make sure you are using Node.js v18 or higher
-Check your version with:
-```bash
-node -v
-```
 
-### 3. Compile the Contracts
+Compile contracts:
 
 ```bash
 npx hardhat compile
 ```
 
-### 4. Run the Tests
+Deploy with parameters (example using Hardhat):
+
+```bash
+npx hardhat run contracts/AssetToken/deploy.js --network <your-network>
+```
+
+Edit deploy parameters in the script:
+```js
+const name = "Real Estate Jakarta";
+const symbol = "REJKT";
+const decimals = 18;
+const assetType = "real_estate";
+const jurisdiction = "ID";
+const legalReference = "ACT-128-2025";
+const documentUri = "ipfs://bafybe...";
+```
+
+---
+
+## 🧪 Testing
+
+You can create test files under `test/` and use Hardhat + Chai for running unit tests.
+
+Example:
 
 ```bash
 npx hardhat test
 ```
 
-#### ✅ Notes
+---
 
-1. Added basic test: **test/basic-test.ts** for **AirdropNFT**
-2. Removed default Hardhat boilerplate: **test/Lock.ts**
+## 📜 License
 
-## 📂 Project Structure
-
-```text
-/contracts             → Solidity smart contracts
-/test                  → Test files using Hardhat framework
-/hardhat.config.ts     → Hardhat configuration (TypeScript)
-/scripts               → Deployment and utility scripts (optional)
-/README.md             → Project documentation
-```
-
-## 🧪 Sample Test
-1. You can find a basic test file in **test/basic-test.ts**.
-2. This test verifies successful deployment of the **AirdropNFT** contract.
-
-## 🤝 Contribution
-Pull Requests are welcome!
-Please follow the instructions above to set up your environment and run tests locally before submitting a PR.
-
-## 📄 License
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This repository is open-source and released under the [MIT License](./LICENSE).
 
 ---
 
-## 👉 Official repository
-[KiiChain GitHub](https://github.com/KiiChain/kii-solidity-contracts)
+## 🙌 Contributing
+
+Pull requests are welcome. Please:
+
+- Keep each module inside its own folder
+- If you add new contracts, place deploy/test files within the same module folder
+- Avoid modifying the root-level README for module-specific usage (place those in `contracts/<Module>/README.md`)
+
+---
+
+## 🔗 Links
+
+- [KiiChain GitHub](https://github.com/KiiChain)
+
+---
+
