@@ -1,120 +1,114 @@
 # 🧾 Kii Solidity Contracts
 
-Welcome to the Solidity smart contracts repository for **KiiChain**, a blockchain infrastructure designed for asset tokenization, RWA (Real World Assets), and institutional-grade compliance. This repository hosts the official and reference implementations of Solidity-based contracts used across the KiiChain ecosystem.
+This repository contains Solidity smart contracts developed for the KiiChain ecosystem, including tokenization of real-world assets (RWA), interfaces, and utilities for deployment and testing. The contracts are modular and designed to support scalable, secure, and extensible EVM-based applications.
 
 ---
 
-## 📁 Repository Structure
+## 📂 Structure
 
-```bash
-kii-solidity-contracts/
-├── contracts/
-│   ├── AssetToken/               # Asset token standard implementation
-│   │   ├── AssetToken.sol
-│   │   ├── AssetTokenFactory.sol
-│   │   ├── interfaces/
-│   │   └── README.md             # Contract-specific documentation
-│   ├── utils/                    # Shared libraries/utilities (if any)
-│   └── ...                       # Other modules coming soon
-├── test/                         # Hardhat test cases
-├── scripts/                      # Deployment & automation scripts
-├── hardhat.config.ts             # Hardhat configuration
-├── package.json
-└── README.md                     # You are here
+```
+contracts/
+│
+├── AssetToken/
+│   ├── AssetToken.sol          # Main ERC20-compatible token with RWA metadata
+│   ├── deploy.js               # Script to deploy AssetToken with parameters
+│   └── README.md               # Module-specific explanation
+│
+├── interfaces/
+│   └── IAssetToken.sol         # Interface for AssetToken
+│
+├── mocks/
+│   └── MockERC20.sol           # Optional: Token mocks for testing
+│
+scripts/
+│   └── deploy.js               # (Moved) - all deploy scripts should be inside module folders
 ```
 
 ---
 
-## 🧱 Modules Overview
+## 📦 Contracts
 
-### `AssetToken`
+### 🔸 AssetToken.sol
 
-The `AssetToken` module provides a robust ERC20-based framework tailored for tokenizing real-world assets with added compliance and lifecycle control.
+A token contract representing RWA (Real World Assets) with the following features:
 
-* `AssetToken.sol` — The main token implementation with pause, freeze, whitelist, and mint/burn logic.
-* `AssetTokenFactory.sol` — Factory contract for deploying new `AssetToken` instances.
-* `interfaces/` — Modular interface definitions.
+- Based on `ERC20` with name/symbol/decimals
+- Includes immutable asset metadata such as:
+  - `assetType` (e.g. "real_estate", "art", "equity")
+  - `jurisdiction` (e.g. "SG", "US", "ID")
+  - `legalReference` (e.g. doc link or reference code)
+  - `documentUri` (e.g. IPFS or HTTPS link)
 
-For more info, see [`contracts/AssetToken/README.md`](contracts/AssetToken/README.md).
+See full module README: [`contracts/AssetToken/README.md`](./contracts/AssetToken/README.md)
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Deployment
 
-### Requirements
+> Requires: [Node.js](https://nodejs.org/), [Hardhat](https://hardhat.org/), and EVM-compatible RPC endpoint.
 
-* [Node.js](https://nodejs.org/) v16+
-* [Hardhat](https://hardhat.org/)
-
-### Installation
+Install dependencies:
 
 ```bash
-git clone https://github.com/KiiChain/kii-solidity-contracts.git
-cd kii-solidity-contracts
 npm install
 ```
 
-### Compile Contracts
+Compile contracts:
 
 ```bash
 npx hardhat compile
 ```
 
-### Run Tests
+Deploy with parameters (example using Hardhat):
+
+```bash
+npx hardhat run contracts/AssetToken/deploy.js --network <your-network>
+```
+
+Edit deploy parameters in the script:
+```js
+const name = "Real Estate Jakarta";
+const symbol = "REJKT";
+const decimals = 18;
+const assetType = "real_estate";
+const jurisdiction = "ID";
+const legalReference = "ACT-128-2025";
+const documentUri = "ipfs://bafybe...";
+```
+
+---
+
+## 🧪 Testing
+
+You can create test files under `test/` and use Hardhat + Chai for running unit tests.
+
+Example:
 
 ```bash
 npx hardhat test
 ```
 
-### Deploy to Testnet
+---
 
-Modify `scripts/deploy.ts` as needed and run:
+## 📜 License
 
-```bash
-npx hardhat run scripts/deploy.ts --network <network>
-```
-
-### Linting & Formatting
-
-```bash
-npx prettier --write .
-npx eslint .
-```
+This repository is open-source and released under the [MIT License](./LICENSE).
 
 ---
 
-## 🧪 Audits
+## 🙌 Contributing
 
-⚠️ These contracts are under active development. Security audits will be listed here once completed.
+Pull requests are welcome. Please:
 
----
-
-## 👥 Contributing
-
-We welcome contributions! Please:
-
-1. Fork the repository.
-2. Make your changes in a feature branch.
-3. Submit a pull request with clear explanations and references.
-
-For contract-specific contributions (e.g., `AssetToken`), please include documentation inside its own folder (e.g., `contracts/AssetToken/README.md`).
+- Keep each module inside its own folder
+- If you add new contracts, place deploy/test files within the same module folder
+- Avoid modifying the root-level README for module-specific usage (place those in `contracts/<Module>/README.md`)
 
 ---
 
-## 📄 License
+## 🔗 Links
 
-This repository is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
-
----
-
-## 📚 Contract-Specific Docs
-
-For detailed explanations of a specific contract, refer to:
-
-* [`contracts/AssetToken/README.md`](contracts/AssetToken/README.md) – AssetToken module
-* *(Other subfolders may follow a similar structure as they’re added)*
+- [KiiChain GitHub](https://github.com/KiiChain)
 
 ---
-
-**Maintained by [KiiChain](https://kiichain.io)**
 
