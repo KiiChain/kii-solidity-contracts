@@ -90,3 +90,16 @@ This project is licensed under the **MIT License**.
 
 [KiiChain GitHub](https://github.com/KiiChain/kii-solidity-contracts)
 
+---
+
+---
+
+## 📘 HelloWorld Example
+
+This repository now includes a minimal `HelloWorld` contract for new developers.
+
+### ✅ Deploy
+
+```bash
+npx hardhat run scripts/deployHelloWorld.ts --network kiichain
+
