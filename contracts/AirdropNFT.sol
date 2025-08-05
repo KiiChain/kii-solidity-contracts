@@ -1,126 +1,102 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract AirdropNFT is ERC721URIStorage {
     uint256 private _tokenId;
 
-    // List of NFTs prices
+    // Mapping tokenId ke harga token
     mapping(uint256 => uint256) public tokenPrices;
 
-    // List of NFTs per user
+    // Mapping pemilik ke daftar tokenId yang dimiliki
     mapping(address => uint256[]) private _ownedTokens;
 
-    // Categories by NFT Id
+    // Mapping tokenId ke kategori NFT
     mapping(uint256 => string[]) private categories;
 
-    // Events
-    event TokenPurchased(address buyer, uint256 tokenId, uint256 price);
+    // ✅ Mapping untuk mengecek apakah token pernah dibuat
+    mapping(uint256 => bool) private tokenExists;
+
+    event TokenPurchased(address indexed buyer, uint256 indexed tokenId, uint256 price);
 
     constructor() ERC721("InkiiCollection", "InkiiNFTs") {}
 
-    // Determine whether the tokenId exist
-    function _exists(uint256 tokenId) internal view virtual returns (bool) {
-        return _ownerOf(tokenId) != address(0);
-    }
-
     function CreateToken(
-        string memory _tokenURI,
+        string memory tokenURI,
         uint256 price,
         string[] memory _categories
-    ) public payable returns (uint256) {
-        require(bytes(_tokenURI).length > 0, "Token URI must be provide");
-        require(price != 0, "Price must be provide");
+    ) public returns (uint256) {
+        require(bytes(tokenURI).length > 0, "Token URI must be provided");
+        require(price > 0, "Price must be provided");
 
-        // Increase the unique identifier for each NFT
-        uint256 tokenId = ++_tokenId;
+        _tokenId += 1;
+        uint256 newTokenId = _tokenId;
 
-        // Mint NFT
-        _mint(msg.sender, tokenId);
+        _mint(msg.sender, newTokenId);
+        _setTokenURI(newTokenId, tokenURI);
+        tokenExists[newTokenId] = true;
 
-        // Set the NFT to a graphic element (Image, pdf, video, etc.)
-        _setTokenURI(tokenId, _tokenURI);
+        _ownedTokens[msg.sender].push(newTokenId);
+        categories[newTokenId] = _categories;
+        setTokenPrice(newTokenId, price);
 
-        // Add token to the owner's list
-        _ownedTokens[msg.sender].push(tokenId);
+        // ✅ Catat bahwa token telah dibuat
+        
 
-        // Categories to the token
-        categories[tokenId] = _categories;
-
-        // Set price to the NFT
-        SetTokenPrice(tokenId, price);
-
-        return tokenId;
+        return newTokenId;
     }
 
-    function SetTokenPrice(uint256 tokenId, uint256 price) public {
-        // Validate the token exists
-        require(_exists(tokenId), "Token does not exist");
-
-        // Validate token's ownership
+    function setTokenPrice(uint256 tokenId, uint256 price) public {
+        require(exists(tokenId), "Token does not exist");
         address owner = ownerOf(tokenId);
         require(msg.sender == owner, "Only the owner can set the price");
-
-        // Update the register of prices
         tokenPrices[tokenId] = price;
     }
 
-    function BuyToken(uint256 tokenId) public payable {
-        // Validate the NFT exists
-        require(_exists(tokenId), "Token does not exist");
-
-        // Validate balance of the wallet who wants to buy the NFT
+    function buyToken(uint256 tokenId) public payable {
+        require(exists(tokenId), "Token does not exist");
         uint256 price = tokenPrices[tokenId];
-        require(
-            msg.value >= price,
-            "Wallet balance does not have enought currency to buy the NFT"
-        );
+        require(msg.value >= price, "Insufficient funds");
 
-        // Validate the buyer doesn't be the same owner
         address owner = ownerOf(tokenId);
         require(owner != msg.sender, "Owner cannot buy their own NFT");
 
-        // Remove the token from the seller's list
         _removeOwnedToken(owner, tokenId);
-
-        // Send the token to the buyer
         _transfer(owner, msg.sender, tokenId);
 
-        // transfer the payment to the NFT owner
-        payable(owner).transfer(msg.value);
+        payable(owner).transfer(price);
 
-        // Return founds whether the user sent more than the exactly value
         if (msg.value > price) {
             payable(msg.sender).transfer(msg.value - price);
         }
 
+        _ownedTokens[msg.sender].push(tokenId);
+
         emit TokenPurchased(msg.sender, tokenId, price);
     }
 
-    function tokensByAddress(
-        address owner
-    ) public view returns (uint256[] memory) {
+    function tokensByAddress(address owner) public view returns (uint256[] memory) {
         return _ownedTokens[owner];
+    }
+
+    function getNFTCategories(uint256 tokenId) public view returns (string[] memory) {
+        return categories[tokenId];
+    }
+
+    // ✅ Fungsi untuk cek eksistensi token (pengganti _exists)
+    function exists(uint256 tokenId) public view returns (bool) {
+        return tokenExists[tokenId];
     }
 
     function _removeOwnedToken(address owner, uint256 tokenId) private {
         uint256 length = _ownedTokens[owner].length;
-
-        // Iterate by the user's tokens
         for (uint256 i = 0; i < length; i++) {
             if (_ownedTokens[owner][i] == tokenId) {
-                _ownedTokens[owner][i] = _ownedTokens[owner][length - 1]; // Last NFT is the element to delete
-                _ownedTokens[owner].pop(); // Delete last element
+                _ownedTokens[owner][i] = _ownedTokens[owner][length - 1];
+                _ownedTokens[owner].pop();
                 break;
             }
         }
-    }
-
-    function getNFTCategories(
-        uint256 tokenId
-    ) public view returns (string[] memory) {
-        return categories[tokenId];
     }
 }

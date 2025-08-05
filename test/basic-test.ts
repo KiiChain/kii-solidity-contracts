@@ -1,12 +1,17 @@
-import { ethers } from "hardhat";
 import { expect } from "chai";
+import { ethers } from "hardhat";
 
-describe("Basic Deployment", function () {
+describe("AirdropNFT", function () {
+  let airdropNFT;
+
+  beforeEach(async function () {
+    const AirdropNFT = await ethers.getContractFactory("AirdropNFT");
+    airdropNFT = await AirdropNFT.deploy();
+    await airdropNFT.waitForDeployment();
+  });
+
   it("Should deploy AirdropNFT contract", async function () {
-    const ContractFactory = await ethers.getContractFactory("AirdropNFT");
-    const contract = await ContractFactory.deploy();
-    await contract.waitForDeployment();
-
-    expect(await contract.getAddress()).to.properAddress;
+    const contractAddress = await airdropNFT.getAddress();
+    expect(contractAddress).to.match(/^0x[a-fA-F0-9]{40}$/);
   });
 });
