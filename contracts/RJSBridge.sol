@@ -20,10 +20,12 @@ contract RJSBridge is Ownable, ReentrancyGuard {
         token = IERC20(tokenAddress);
     }
 
-    function wrap(uint256 amount) external {
+    function wrap(uint256 amount) external nonReentrant {
         require(amount > 0, "Amount must be greater than 0");
-        token.safeTransferFrom(msg.sender, address(this), amount);
+        // effects
         wrappedBalance[msg.sender] += amount;
+        // interaction
+        token.safeTransferFrom(msg.sender, address(this), amount);
         emit Wrapped(msg.sender, amount);
     }
 
