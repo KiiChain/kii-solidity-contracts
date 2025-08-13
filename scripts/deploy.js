@@ -15,6 +15,7 @@ async function main() {
   const region = "Global";
 
   const assetToken = await AssetToken.deploy(name, symbol, assetType, issuer, region);
+  await assetToken.waitForDeployment();
 
   console.log("AssetToken deployed to:", assetToken.target);
 }

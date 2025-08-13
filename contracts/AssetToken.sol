@@ -13,17 +13,19 @@ contract AssetToken is ERC20, Ownable {
     string public issuer;
     string public region;
 
+    event MetadataUpdated(string assetType, string issuer, string region);
+
     constructor(
-    string memory name_,
-    string memory symbol_,
-    string memory assetType_,
-    string memory issuer_,
-    string memory region_
-) ERC20(name_, symbol_) Ownable(msg.sender) {
-    assetType = assetType_;
-    issuer = issuer_;
-    region = region_;
-}
+        string memory name_,
+        string memory symbol_,
+        string memory assetType_,
+        string memory issuer_,
+        string memory region_
+    ) ERC20(name_, symbol_) Ownable(msg.sender) {
+        assetType = assetType_;
+        issuer = issuer_;
+        region = region_;
+    }
 
     /**
      * @dev Mint new tokens to an address.
@@ -43,10 +45,15 @@ contract AssetToken is ERC20, Ownable {
     /**
      * @dev Update asset metadata.
      */
-    function updateMetadata(string memory newAssetType, string memory newIssuer, string memory newRegion) external onlyOwner {
+    function updateMetadata(
+        string memory newAssetType,
+        string memory newIssuer,
+        string memory newRegion
+    ) external onlyOwner {
         assetType = newAssetType;
         issuer = newIssuer;
         region = newRegion;
+        emit MetadataUpdated(newAssetType, newIssuer, newRegion);
     }
 }
 
