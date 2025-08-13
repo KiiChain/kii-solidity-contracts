@@ -1,39 +1,59 @@
-# KiiChain Solidity Contracts
+🧾 Kii Solidity Contracts
 
-This repository contains smart contracts for the **KiiChain** ecosystem, written in Solidity. It includes contracts for Real World Asset (RWA) tokenization, NFT airdrops, swaps, and more. The goal is to demonstrate and contribute to the open-source community.
+This repository contains smart contracts for the KiiChain ecosystem, written in Solidity.
 
----
+📘 Introduction
 
-## 📄 Smart Contract Overview
+This is a simple swap contract that uses the Cosmos bank module on the Kii EVM testnet. It is designed to swap EVM Kii tokens for internal Cosmos Kii tokens and vice versa.
 
-The main smart contracts include:
+🚀 Getting Started
 
-- 🏦 **AssetToken.sol:** ERC20 token representing real-world assets.
-- 🎁 **AirdropNFT.sol:** Simple NFT airdrop contract.
-- 🔄 **Swap Contracts:** Swap between EVM Kii tokens and Cosmos Kii tokens.
+Follow these steps to set up the development environment and test the contracts locally.
 
-✅ **Deployed Contract:** [0x2D2f2889aA49dd67032FFF5f8628a5d750E666b8](https://explorer.kiichain.io/address/0x2D2f2889aA49dd67032FFF5f8628a5d750E666b8)  
-✅ **Deployer Address:** `0xf3C61576526a0535035174ec8f892077C74Caaf4`  
-✅ **Network:** Kiichain Testnet → [https://explorer.kiichain.io/](https://explorer.kiichain.io/)
-
----
-
-## 📘 Introduction
-
-This repository showcases several example smart contracts, including:
-
-- 🏦 **RWA AssetToken:** ERC20 token representing real-world assets.
-- 🎁 **AirdropNFT:** Simple NFT airdrop contract.
-- 🔄 **Swap Contracts:** Swap between EVM Kii tokens and Cosmos Kii tokens.
-
----
-
-## 🚀 Getting Started
-
-### 1️⃣ Clone the Repository
-
-```bash
+1. Clone the Repository
 git clone https://github.com/KiiChain/kii-solidity-contracts.git
 cd kii-solidity-contracts
+
+2. Install Dependencies
 npm install
+
+⚠️ Make sure you are using Node.js v18 or higher. Check your version with:
+node -v
+
+3. Compile the Contracts
+npx hardhat compile
+
+4. Run the Tests
+npx hardhat test
+
+✅ Notes
+
+- Added basic test: test/basic-test.ts for AirdropNFT
+- Removed default Hardhat boilerplate: test/Lock.ts
+
+📂 Project Structure
+
+/contracts             → Solidity smart contracts
+/test                  → Test files using Hardhat framework
+/hardhat.config.ts     → Hardhat configuration (TypeScript)
+/scripts               → Deployment and utility scripts (optional)
+/README.md             → Project documentation
+
+🧪 Sample Test
+
+You can find a basic test file in test/basic-test.ts.
+This test verifies successful deployment of the AirdropNFT contract.
+
+🤝 Contribution
+
+Pull Requests are welcome!
+Please follow the instructions above to set up your environment and run tests locally before submitting a PR.
+
+📄 License
+
+This project is licensed under the MIT License.
+
+👉 Official repository
+
+KiiChain GitHub: https://github.com/KiiChain/kii-solidity-contracts
 
