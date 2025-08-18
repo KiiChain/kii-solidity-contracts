@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.24;
 
 contract PreSigningData {
     uint256 constant TOKEN_AMOUNT = 1_000_000_000_000_000_000; // 1 Kii
