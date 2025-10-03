@@ -1,4 +1,4 @@
-import { HardhatUserConfig } from "hardhat/config";
+import type { HardhatUserConfig } from "hardhat/dist/src/config";
 import "@nomicfoundation/hardhat-toolbox-viem";
 
 const config: HardhatUserConfig = {
@@ -8,6 +8,7 @@ const config: HardhatUserConfig = {
       url: "https://json-rpc.uno.sentry.testnet.v3.kiivalidator.com",
       accounts: ["0x<YOUR_PRIVATE_KEY>"],
       timeout: 120000,
+      type: "http",
     },
   },
 };
