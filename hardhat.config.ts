@@ -1,4 +1,4 @@
-import type { HardhatUserConfig } from "hardhat/dist/src/config";
+import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox-viem";
 
 const config: HardhatUserConfig = {

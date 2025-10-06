@@ -222,7 +222,12 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
             revert NoFundsToWithdraw();
         }
 
-        bool success = oroToken.transfer(owner(), balance);
+        bool allowanceApproved = oroToken.approve(address(this), balance);
+        if (!allowanceApproved) {
+            revert TransferFailed();
+        }
+
+        bool success = oroToken.transferFrom(address(this), owner(), balance);
         if (!success) {
             revert TransferFailed();
         }
@@ -242,7 +247,12 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
             "Insufficient balance"
         );
 
-        bool success = oroToken.transfer(owner(), amount);
+        bool allowanceApproved = oroToken.approve(address(this), amount);
+        if (!allowanceApproved) {
+            revert TransferFailed();
+        }
+
+        bool success = oroToken.transferFrom(address(this), owner(), amount);
         if (!success) {
             revert TransferFailed();
         }
