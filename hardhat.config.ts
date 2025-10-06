@@ -1,5 +1,6 @@
 import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox-viem";
+import hardhatIgnitionViemPlugin from "@nomicfoundation/hardhat-ignition-viem";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
@@ -11,6 +12,7 @@ const config: HardhatUserConfig = {
       type: "http",
     },
   },
+  plugins: [hardhatIgnitionViemPlugin],
 };
 
 export default config;

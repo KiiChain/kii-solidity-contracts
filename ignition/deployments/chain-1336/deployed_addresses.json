@@ -1,5 +1,6 @@
 {
   "OroModule#OroToken": "0x5a47EF9C19dae206e99382955eb9eD5ca510A7Fa",
   "CertificationsModule#Certifications": "0x799dFA0DC47a6BD25985DE8F08C042BB483dCfD5",
-  "SignTCModule#SignTC": "0xA3414e202f59AA5341d6D3bcD82834c628aF4dFf"
+  "SignTCModule#SignTC": "0xA3414e202f59AA5341d6D3bcD82834c628aF4dFf",
+  "NFTRegistrationModule#NFTRegistration": "0xeF4F3483470F80f7d18D2d0e6de493358528D030"
 }
