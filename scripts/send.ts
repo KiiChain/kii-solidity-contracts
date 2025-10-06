@@ -3,7 +3,7 @@ import {
   http,
   createPublicClient,
   createWalletClient,
-  parseGwei
+  parseGwei,
 } from "viem";
 import bankAbi from "./abi/bank.json";
 import { privateKeyToAccount } from "viem/accounts";
@@ -38,9 +38,7 @@ export const walletClient = createWalletClient({
   transport: http(),
 });
 
-const account = privateKeyToAccount(
-  ""
-);
+const account = privateKeyToAccount("");
 
 async function main() {
   try {
@@ -58,7 +56,7 @@ async function main() {
           },
         ],
       ],
-      gasPrice: parseGwei('50'),  
+      gasPrice: parseGwei("50"),
     });
     const hash = await walletClient.writeContract(request);
     const transaction = await publicClient.waitForTransactionReceipt({
