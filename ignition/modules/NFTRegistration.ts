@@ -24,7 +24,7 @@ export default buildModule("NFTRegistrationModule", (m) => {
   // Example: Date.now() / 1000 for current time
   const startDate = m.getParameter(
     "startDate",
-    Math.floor(new Date("2025-10-07T15:00:00Z").getTime() / 1000).toString()
+    Math.floor(new Date("2025-10-06T15:00:00Z").getTime() / 1000).toString()
   );
 
   // Maximum number of registration spots

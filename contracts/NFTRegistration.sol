@@ -115,10 +115,6 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
         require(_oroTokenAddress != address(0), "Invalid token address");
         require(_initialPrice > 0, "Initial price must be greater than 0");
         require(_maxSpots > 0, "Max spots must be greater than 0");
-        require(
-            _startDate >= block.timestamp,
-            "Start date must be in the future"
-        );
 
         oroToken = IERC20(_oroTokenAddress);
         initialPrice = _initialPrice;
