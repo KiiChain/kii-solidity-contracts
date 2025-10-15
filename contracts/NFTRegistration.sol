@@ -35,7 +35,7 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
     /**
      * @dev The maximum number of registration spots available
      */
-    uint256 public immutable maxSpots;
+    uint256 public maxSpots;
 
     /**
      * @dev The current price for registration in ORO tokens
@@ -73,6 +73,13 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
     event Withdrawn(address indexed owner, uint256 amount);
 
     /**
+     * @dev Emitted when the owner changes the maximum number of spots
+     * @param oldMaxSpots The previous maximum number of spots
+     * @param newMaxSpots The new maximum number of spots
+     */
+    event MaxSpotsChanged(uint256 oldMaxSpots, uint256 newMaxSpots);
+
+    /**
      * @dev Error thrown when registration has not started yet
      */
     error RegistrationNotStarted();
@@ -96,6 +103,11 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
      * @dev Error thrown when there are no funds to withdraw
      */
     error NoFundsToWithdraw();
+
+    /**
+     * @dev Error thrown when trying to set maxSpots to an invalid value
+     */
+    error InvalidMaxSpots();
 
     /**
      * @dev Constructor to initialize the registration contract
@@ -270,6 +282,23 @@ contract NFTRegistration is Ownable, Pausable, ReentrancyGuard {
      */
     function unpause() external onlyOwner {
         _unpause();
+    }
+
+    /**
+     * @dev Allows the owner to change the maximum number of registration spots
+     * @param _newMaxSpots The new maximum number of spots
+     * Can only be called by the contract owner
+     * New max spots must be greater than 0 and greater than or equal to current registrants
+     */
+    function setMaxSpots(uint256 _newMaxSpots) external onlyOwner {
+        if (_newMaxSpots == 0 || _newMaxSpots < registrants.length) {
+            revert InvalidMaxSpots();
+        }
+
+        uint256 oldMaxSpots = maxSpots;
+        maxSpots = _newMaxSpots;
+
+        emit MaxSpotsChanged(oldMaxSpots, _newMaxSpots);
     }
 
     /**
