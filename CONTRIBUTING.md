@@ -1,11 +1,12 @@
 # Contribution Guidelines
 
-Contributions to the Kiijs library are welcome. As a contributor, here are the guidelines we would like you to follow:
+Contributions to the Kii-solidity-contracts repository are welcome. This repository serves to centralize community contracts. As a contributor, here are the guidelines we would like you to follow:
 
 - [Code of Conduct](#coc)
-- [Question or Problem?](#question)
+- [Question or Problem?](#issue)
 - [Issues and Bugs](#issue)
 - [Feature Requests](#feature)
+- [Community Contract Guidelines](#community-contracts)
 - [Submission Guidelines](#submit)
 - [Coding Rules](#rules)
 - [Commit Message Guidelines](#commit)
@@ -26,6 +27,10 @@ If you would like to *implement* a new feature:
 
 - For a **Major Feature**, first [open an issue](#submit-issue) and outline your proposal so that it can be discussed.
 - **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
+
+## <a name="community-contracts"></a> Community Contract Guidelines
+
+For instructions on adding a community smart contract, including folder structure, required elements, and naming conventions, please see our [Community Contract Guidelines](COMMUNITY.md).
 
 ## <a name="submit"></a> Submission Guidelines
 
@@ -66,7 +71,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
 #### Reviewing a Pull Request
 
-The Kiijs team reserves the right not to accept pull requests from community members who haven't been good citizens of the community. Such behavior includes not following our [code of conduct][coc] and applies within or outside the managed channels.
+The repository maintainers reserve the right not to accept pull requests from community members who haven't been good citizens of the community. Such behavior includes not following our [code of conduct][coc] and applies within or outside the managed channels.
 
 When you contribute a new feature, the maintenance burden is transferred to the core team. This means that the benefit of the contribution must be compared against the cost of maintaining the feature.
 
@@ -96,7 +101,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 - All public features **must be documented**.
 - All files must include a license header. 
-- Keep API compatibility in mind when you change any code under `Kiijs`. Above version `1.0.0`, breaking changes can happen across versions with different left digit. Below version `1.0.0`, they can happen across versions with different middle digit. Reviewers of your pull request will comment on any API compatibility issues.
+- Keep API compatibility in mind when you change any core abstractions. Reviewers of your pull request will comment on any compatibility issues.
 
 ## <a name="commit"></a> Commit Message Convention
 
@@ -112,8 +117,8 @@ Please follow the [Conventional Commits v1.0.0][convcommit]. The commit types mu
 - **test**: Adding missing tests or correcting existing tests
 
 [coc]: ./CODE_OF_CONDUCT.md
-[issues]: https://github.com/KiiChain/kiijs-sdk/issues
-[new-issue]: https://github.com/KiiChain/kiijs-sdk/issues/new/choose
-[prs]: https://github.com/KiiChain/kiijs-sdk/pulls
+[issues]: https://github.com/KiiChain/kii-solidity-contracts/issues
+[new-issue]: https://github.com/KiiChain/kii-solidity-contracts/issues/new/choose
+[prs]: https://github.com/KiiChain/kii-solidity-contracts/pulls
 [convcommit]: https://www.conventionalcommits.org/en/v1.0.0/
-[github]: https://github.com/KiiChain/kiijs-sdk
+[github]: https://github.com/KiiChain/kii-solidity-contracts
