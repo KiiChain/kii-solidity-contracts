@@ -3,7 +3,7 @@
 Contributions to the Kii-solidity-contracts repository are welcome. This repository serves to centralize community contracts. As a contributor, here are the guidelines we would like you to follow:
 
 - [Code of Conduct](#coc)
-- [Question or Problem?](#question)
+- [Question or Problem?](#issue)
 - [Issues and Bugs](#issue)
 - [Feature Requests](#feature)
 - [Community Contract Guidelines](#community-contracts)
