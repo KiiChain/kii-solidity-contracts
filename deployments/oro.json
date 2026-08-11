@@ -1,0 +1,8 @@
+{
+  "chainId": 1336,
+  "name": "oro",
+  "entryPoint": null,
+  "verifyingPaymaster": null,
+  "verifyingSigner": null,
+  "note": "Filled by scripts/account-abstraction/deployVerifyingPaymaster.ts after deploy"
+}
